@@ -6,6 +6,7 @@ import br.com.portaldbv.domain.enums.error.ClubErrorEnum;
 import br.com.portaldbv.domain.exceptions.ClubException;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 public class ClubUseCases {
@@ -14,6 +15,10 @@ public class ClubUseCases {
 
     public ClubUseCases(ClubRepositoryGateway repository) {
         this.repository = repository;
+    }
+
+    public List<Club> getAll() {
+        return repository.getAll();
     }
 
     public Club getById(Long id) {
@@ -35,6 +40,28 @@ public class ClubUseCases {
         club.setBank(BigDecimal.ZERO);
 
         return repository.register(club);
+    }
+
+    public Club update(Long id, Club club) {
+        var oldClub = getById(id);
+        oldClub.setName(club.getName());
+        return repository.update(oldClub);
+    }
+
+    public void deposit(Long id, BigDecimal value) {
+        var club = getById(id);
+        club.setBank(club.getBank().add(value));
+        repository.update(club);
+    }
+
+    public void withdraw(Long id, BigDecimal value) {
+        var club = getById(id);
+        club.setBank(club.getBank().subtract(value));
+        repository.update(club);
+    }
+
+    public void delete(Long id) {
+        repository.delete(getById(id));
     }
 
 }

@@ -1,4 +1,4 @@
-package br.com.portaldbv.infra.dto.response;
+package br.com.portaldbv.infra.dto.response.club;
 
 import java.math.BigDecimal;
 

@@ -1,4 +1,4 @@
-package br.com.portaldbv.infra.dto.request;
+package br.com.portaldbv.infra.dto.request.club;
 
 import jakarta.validation.constraints.NotBlank;
 
