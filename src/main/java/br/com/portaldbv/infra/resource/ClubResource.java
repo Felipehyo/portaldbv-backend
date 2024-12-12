@@ -1,7 +1,7 @@
 package br.com.portaldbv.infra.resource;
 
 import br.com.portaldbv.domain.entities.Club;
-import br.com.portaldbv.domain.enums.error.Errors;
+import br.com.portaldbv.domain.enums.constant.Errors;
 import br.com.portaldbv.infra.dto.ErrorDTO;
 import br.com.portaldbv.infra.dto.request.club.BankRequestDTO;
 import br.com.portaldbv.infra.dto.request.club.ClubRequestDTO;

@@ -11,7 +11,7 @@ spring:
     url: ${DATABASE_URL}
     username: ${DATABASE_USER}
     password: ${DATABASE_PASSWORD}
-    driver-class-name: ${DATABASE_DRIVER:org.postgresql.Driver}
+    driver-class-name: ${DATABASE_DRIVER}
   jpa:
     hibernate:
       ddl-auto: update
@@ -19,9 +19,23 @@ spring:
     generate-ddl: false
     properties:
       hibernate:
-        dialect: ${DATABASE_DIALECT:org.hibernate.dialect.PostgreSQLDialect}
+        dialect: ${DATABASE_DIALECT}
     thymeleaf:
       cache: true
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+backend-configs:
+  aws:
+    s3:
+      bucket: ${AWS_S3_BUCKET}
+    credentials:
+      key.id: ${AWS_ACCESS_KEY_ID}
+      secret.key: ${AWS_ACCESS_SECRET}
+    region: ${AWS_REGION}
 
 # swagger-ui and api-docs custom path
 springdoc:

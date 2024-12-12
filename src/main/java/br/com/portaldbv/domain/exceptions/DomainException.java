@@ -1,15 +1,15 @@
 package br.com.portaldbv.domain.exceptions;
 
+import br.com.portaldbv.domain.enums.error.ErrorDomain;
+import lombok.Getter;
+
+@Getter
 public class DomainException extends RuntimeException {
 
-    public DomainException() {
+    private final ErrorDomain error;
+
+    public DomainException(ErrorDomain error) {
+        this.error = error;
     }
 
-    public DomainException(String message) {
-        super(message);
-    }
-
-    public DomainException(String message, Throwable cause) {
-        super(message, cause);
-    }
 }

@@ -6,4 +6,5 @@ public interface ErrorDomain {
 
     String getDetails();
 
+    String name();
 }

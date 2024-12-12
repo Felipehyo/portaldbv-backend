@@ -6,10 +6,9 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum ClubErrorEnum implements ErrorDomain {
-    ALREADY_REGISTERED(400, Errors.CLUB_ALREADY_REGISTERED_MESSAGE),
-    ID_NOT_FOUND(404, Errors.CLUB_ID_NOT_FOUND),
-    NAME_NOT_FOUND(404, Errors.CLUB_NAME_NOT_FOUND);
+public enum AwsErrorEnum implements ErrorDomain {
+    S3_ERROR_SAVING(400, Errors.AWS_S3_ERROR_SAVING),
+    S3_FILE_CONVERT_ERROR(400, Errors.FILE_CONVERT_ERROR);
 
     private final Integer httpStatusCode;
     private final String details;
