@@ -62,4 +62,6 @@ public class AwsS3UseCases {
         return convFile;
     }
 
+    //todo -> criar método para deletar arquivo do S3s
+
 }
