@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 import software.amazon.awssdk.services.s3.model.S3Exception;
@@ -27,7 +28,7 @@ public class AwsS3ClientImpl implements AwsS3ClientGateway {
     @Override
     public void saveFile(File file, String bucket, String fileName) {
         try {
-            PutObjectRequest putObjectRequest = PutObjectRequest.builder()
+            var putObjectRequest = PutObjectRequest.builder()
                     .bucket(bucket)
                     .key(fileName)
                     .build();
@@ -35,12 +36,26 @@ public class AwsS3ClientImpl implements AwsS3ClientGateway {
             s3Client.putObject(putObjectRequest, Paths.get(file.getPath()));
 
         } catch (S3Exception e) {
-            throw new RuntimeException("Error uploading file to S3: " + e.awsErrorDetails().errorMessage());
+            throw new RuntimeException("Erro ao atualizar arquivo: " + e.awsErrorDetails().errorMessage());
         } finally {
             var isDeleted = file.delete();
             if (!isDeleted) {
                 log.error("Ocorreu um erro ao deletar o arquivo da memória temporária");
             }
+        }
+    }
+
+    @Override
+    public void deleteFile(String filePathAndName, String bucket) {
+        try {
+            var deleteObjectRequest = DeleteObjectRequest.builder()
+                    .bucket(bucket)
+                    .key(filePathAndName)
+                    .build();
+
+            s3Client.deleteObject(deleteObjectRequest);
+        } catch (S3Exception e) {
+            throw new RuntimeException("Erro ao deletar arquivo: " + e.awsErrorDetails().errorMessage());
         }
     }
 

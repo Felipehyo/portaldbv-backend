@@ -69,6 +69,8 @@ public class SpecialityUseCases {
     }
 
     public void delete(Long id) {
+        var speciality = getById(id);
+        awsS3UseCases.deleteFile(speciality.getImageUrl(), s3BucketName);
         repository.delete(getById(id));
     }
 

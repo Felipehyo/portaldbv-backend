@@ -20,6 +20,7 @@ public class Errors {
      * Aws Errors
      */
     public static final String AWS_S3_ERROR_SAVING = "Erro ao salvar arquivo";
+    public static final String AWS_S3_ERROR_DELETING = "Erro ao deletar arquivo";
     public static final String FILE_CONVERT_ERROR = "Erro ao tentar converter arquivo";
 
     /**

@@ -8,6 +8,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum AwsErrorEnum implements ErrorDomain {
     S3_ERROR_SAVING(400, Errors.AWS_S3_ERROR_SAVING),
+    S3_ERROR_DELETING(400, Errors.AWS_S3_ERROR_DELETING),
     S3_FILE_CONVERT_ERROR(400, Errors.FILE_CONVERT_ERROR);
 
     private final Integer httpStatusCode;

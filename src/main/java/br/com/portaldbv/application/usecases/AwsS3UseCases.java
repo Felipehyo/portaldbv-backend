@@ -62,6 +62,13 @@ public class AwsS3UseCases {
         return convFile;
     }
 
-    //todo -> criar método para deletar arquivo do S3s
+    public void deleteFile(String linkFile, String s3BucketName) {
+        try {
+            client.deleteFile(linkFile.split("amazonaws.com/")[1], s3BucketName);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            throw new DomainException(AwsErrorEnum.S3_ERROR_SAVING);
+        }
+    }
 
 }

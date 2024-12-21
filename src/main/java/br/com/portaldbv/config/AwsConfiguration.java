@@ -10,6 +10,7 @@ import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.S3Configuration;
 
 @Configuration
 public class AwsConfiguration {
@@ -28,6 +29,7 @@ public class AwsConfiguration {
         AwsBasicCredentials awsCredentials = AwsBasicCredentials.create(accessKeyId, secretAccessKey);
         return S3Client.builder()
                 .credentialsProvider(StaticCredentialsProvider.create(awsCredentials))
+                .serviceConfiguration(S3Configuration.builder().pathStyleAccessEnabled(false).build())
                 .region(Region.of(region))
                 .build();
     }

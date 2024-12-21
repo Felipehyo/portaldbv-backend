@@ -86,7 +86,8 @@ public class UnitUseCases {
     }
 
     public void delete(Long id) {
-        //todo -> precisa deletar o arquivo do S3 tb
+        var unit = getById(id);
+        awsS3UseCases.deleteFile(unit.getImageLink(), s3BucketName);
         repository.delete(getById(id));
     }
 
