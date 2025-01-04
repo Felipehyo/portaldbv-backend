@@ -28,6 +28,14 @@ public class Errors {
      */
     public static final String UNIT_ALREADY_REGISTERED_MESSAGE = "Unidade com o nome informado já se encontra cadastrado";
     public static final String UNIT_ID_NOT_FOUND = "Unidade com id informado não encontrado";
+    public static final String UNIT_INVALID_CLUB = "Unidade não pertence ao clube informado";
     public static final String UNIT_NAME_NOT_FOUND = "Unidade com o nome informado não encontrado";
 
+    /**
+     * User Errors
+     */
+    public static final String USER_ID_NOT_FOUND = "Usuário com id informado não encontrado";
+    public static final String USER_ALREADY_REGISTERED = "Já existe um usuário com este cpf cadastrado";
+    public static final String INVALID_PASSWORD = "Senha inválida. A senha deve conter entre 6 e 16 dígitos.";
+    public static final String INVALID_USER = "Usuário inválido. O usuário deve conter entre 6 e 100 dígitos.";
 }

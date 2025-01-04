@@ -46,7 +46,7 @@ public class UnitUseCases {
         return repository.register(unit);
     }
 
-    public Unit update(Long id, Unit unit, MultipartFile multipartFile) { //todo -> caso a imagem seja diferente, é preciso apagar a anterior e guardar a nova
+    public Unit update(Long id, Unit unit, MultipartFile multipartFile) {
         var oldUnit = getById(id);
 
         oldUnit.setName(unit.getName());
@@ -55,7 +55,9 @@ public class UnitUseCases {
         oldUnit.setActive(unit.getActive());
         oldUnit.setGender(unit.getGender());
         if (multipartFile != null && !multipartFile.isEmpty()) {
+            final String oldImage = unit.getImageLink();
             oldUnit.setImageLink(awsS3UseCases.saveFile(multipartFile, AwsConstants.S3_PATH_UNIT, s3BucketName));
+            awsS3UseCases.deleteFile(oldImage, s3BucketName);
         }
 
         return repository.update(oldUnit);

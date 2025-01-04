@@ -61,8 +61,10 @@ public class SpecialityUseCases {
             speciality.setCategory(newSpeciality.getCategory());
         }
 
-        if (multipartFile != null) {
+        if (multipartFile != null && !multipartFile.isEmpty()) {
+            final String oldImage = speciality.getImageUrl();
             speciality.setImageUrl(awsS3UseCases.updateFile(multipartFile, AwsConstants.S3_PATH_NAME, newSpeciality.getImageUrl(), s3BucketName));
+            awsS3UseCases.deleteFile(oldImage, s3BucketName);
         }
 
         return repository.update(speciality);

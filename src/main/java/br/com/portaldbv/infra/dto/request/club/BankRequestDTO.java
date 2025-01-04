@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 public record BankRequestDTO(
 
-        @NotNull(message = "O campo value deve ser informado!")
+        @NotNull(message = "O campo amount deve ser informado!")
         BigDecimal value
 
 ) {

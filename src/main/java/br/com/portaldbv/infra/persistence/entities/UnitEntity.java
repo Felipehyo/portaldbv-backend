@@ -1,6 +1,5 @@
 package br.com.portaldbv.infra.persistence.entities;
 
-import br.com.portaldbv.domain.entities.Club;
 import br.com.portaldbv.domain.enums.GenderEnum;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
