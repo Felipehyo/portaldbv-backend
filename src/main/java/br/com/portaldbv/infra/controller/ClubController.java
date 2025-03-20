@@ -31,19 +31,19 @@ public class ClubController implements ClubResource {
 
     @Override
     public ResponseEntity<Object> getById(Long id) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(mapper.paraDTO(useCases.getById(id)));
+        return ResponseEntity.status(HttpStatus.CREATED).body(mapper.toDTO(useCases.getById(id)));
     }
 
     @Override
     public ResponseEntity<Object> register(ClubRequestDTO clubRequest) {
         Club club = useCases.register(mapper.toDomain(clubRequest));
-        return ResponseEntity.status(HttpStatus.CREATED).body(mapper.paraDTO(club));
+        return ResponseEntity.status(HttpStatus.CREATED).body(mapper.toDTO(club));
     }
 
     @Override
     public ResponseEntity<Object> update(Long id, ClubRequestDTO clubRequest) {
         var club = useCases.update(id, mapper.toDomain(clubRequest));
-        return ResponseEntity.status(HttpStatus.OK).body(mapper.paraDTO(club));
+        return ResponseEntity.status(HttpStatus.OK).body(mapper.toDTO(club));
     }
 
     @Override
@@ -60,7 +60,7 @@ public class ClubController implements ClubResource {
 
     @Override
     public ResponseEntity<Object> withdraw(Long id, BankRequestDTO bankRequest) {
-        useCases.withdraw(id, bankRequest.value());
+        useCases.subtract(id, bankRequest.value());
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

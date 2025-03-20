@@ -46,6 +46,12 @@ public class UserRepositoryGatewayImpl implements UserRepositoryGateway {
     }
 
     @Override
+    public Optional<User> getByEmail(String email) {
+        Optional<UserEntity> entity = userRepository.getUserEntityByEmail(email);
+        return entity.map(mapper::toDomain);
+    }
+
+    @Override
     public User register(User user) {
         UserEntity entity = mapper.toEntity(user);
         return mapper.toDomain(userRepository.save(entity));

@@ -3,7 +3,9 @@ package br.com.portaldbv.infra.controller;
 import br.com.portaldbv.application.usecases.UserUseCases;
 import br.com.portaldbv.domain.enums.UserTypeEnum;
 import br.com.portaldbv.infra.dto.request.AmountRequest;
+import br.com.portaldbv.infra.dto.request.user.LoginRequestDTO;
 import br.com.portaldbv.infra.dto.request.user.UserRequestDTO;
+import br.com.portaldbv.infra.dto.response.user.LoginResponseDTO;
 import br.com.portaldbv.infra.mapper.UserMapper;
 import br.com.portaldbv.infra.resource.UserResource;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -30,7 +32,13 @@ public class UserController implements UserResource {
 
     @Override
     public ResponseEntity<Object> getById(UUID id) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(mapper.toResponse(useCases.getById(id)));
+        return ResponseEntity.status(HttpStatus.OK).body(mapper.toResponse(useCases.getById(id)));
+    }
+
+    @Override
+    public ResponseEntity<LoginResponseDTO> doLogin(LoginRequestDTO userRequest) {
+        var user = useCases.doLogin(userRequest.email(), userRequest.password());
+        return ResponseEntity.status(HttpStatus.OK).body(new LoginResponseDTO(user.getId(), user.getClub().getId()));
     }
 
     @Override
@@ -47,13 +55,13 @@ public class UserController implements UserResource {
 
     @Override
     public ResponseEntity<Object> depositAmount(UUID id, AmountRequest request) {
-        useCases.depositAmount(id, request.amount());
+        useCases.deposit(id, request.amount());
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @Override
     public ResponseEntity<Object> withdrawAmount(UUID id, AmountRequest request) {
-        useCases.withdrawAmount(id, request.amount());
+        useCases.subtract(id, request.amount());
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 

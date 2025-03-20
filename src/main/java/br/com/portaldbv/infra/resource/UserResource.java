@@ -4,8 +4,10 @@ import br.com.portaldbv.domain.entities.User;
 import br.com.portaldbv.domain.enums.UserTypeEnum;
 import br.com.portaldbv.domain.enums.constant.Errors;
 import br.com.portaldbv.infra.dto.ErrorDTO;
+import br.com.portaldbv.infra.dto.request.user.LoginRequestDTO;
 import br.com.portaldbv.infra.dto.request.user.UserRequestDTO;
 import br.com.portaldbv.infra.dto.request.AmountRequest;
+import br.com.portaldbv.infra.dto.response.user.LoginResponseDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -35,10 +37,18 @@ public interface UserResource {
     @Operation(summary = "Buscar por id", method = "GET", description = "Recurso para consultar usuário por id")
     @ApiResponses(value = {
             @ApiResponse(description = "Usuário encontrado com sucesso", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = User.class))),
-            @ApiResponse(responseCode = "404", description = Errors.USER_ID_NOT_FOUND, content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDTO.class))),
+            @ApiResponse(responseCode = "404", description = Errors.INVALID_CREDENTIALS, content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDTO.class))),
     })
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<Object> getById(@PathVariable(value = "id") UUID id);
+
+    @Operation(summary = "Fazer login", method = "GET", description = "Recurso para fazer login")
+    @ApiResponses(value = {
+            @ApiResponse(description = "Usuário logado com sucesso", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = User.class))),
+            @ApiResponse(responseCode = "400", description = Errors.USER_ID_NOT_FOUND, content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDTO.class))),
+    })
+    @GetMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<LoginResponseDTO> doLogin(@RequestBody LoginRequestDTO userRequest);
 
     @Operation(summary = "Cadastrar usuário", method = "POST", description = "Recurso para cadastrar usuários")
     @ApiResponses(value = {

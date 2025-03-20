@@ -15,7 +15,7 @@ public record UserRequestDTO(
         String email,
         String password,
         @NotNull(message = "O campo tipo de usuário deve ser informado!")
-        UserTypeEnum userType,
+        UserTypeEnum type,
         Long unitId,
         Date birthDate,
         @NotNull(message = "O campo sexo deve ser informado!")

@@ -22,7 +22,7 @@ public class User {
     private String cpf;
     private String email;
     private String password;
-    private UserTypeEnum userType;
+    private UserTypeEnum type;
     private Unit unit;
     private Boolean active;
     private Date birthDate;

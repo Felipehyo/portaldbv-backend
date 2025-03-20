@@ -8,21 +8,17 @@ import br.com.portaldbv.domain.enums.error.UnitErrorEnum;
 import br.com.portaldbv.domain.enums.error.UserErrorEnum;
 import br.com.portaldbv.domain.exceptions.DomainException;
 import io.micrometer.common.util.StringUtils;
+import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.*;
 
+@RequiredArgsConstructor
 public class UserUseCases {
 
     private final UserRepositoryGateway repository;
     private final ClubUseCases clubUseCases;
     private final UnitUseCases unitUseCases;
-
-    public UserUseCases(UserRepositoryGateway repository, ClubUseCases clubUseCases, UnitUseCases unitUseCases) {
-        this.repository = repository;
-        this.clubUseCases = clubUseCases;
-        this.unitUseCases = unitUseCases;
-    }
 
     public List<User> getAllByClub(Long clubId, Boolean onlyActives, Boolean onlyUsersWithCashValue, List<UserTypeEnum> userTypeList) {
         return Optional.ofNullable(repository.getAllByClubId(clubId,
@@ -71,7 +67,7 @@ public class UserUseCases {
         if (user.getBirthDate() != null) oldUser.setBirthDate(user.getBirthDate());
         if (user.getGender() != null) oldUser.setGender(user.getGender());
         if (user.getActive() != null) oldUser.setActive(user.getActive());
-        if (user.getUserType() != null) oldUser.setUserType(user.getUserType());
+        if (user.getType() != null) oldUser.setType(user.getType());
 
         validateCredentials(user);
         if (!StringUtils.isBlank(user.getEmail())) oldUser.setEmail(user.getEmail());
@@ -91,13 +87,31 @@ public class UserUseCases {
         return repository.update(oldUser);
     }
 
-    public void depositAmount(UUID id, BigDecimal amount) {
+    public User doLogin(String email, String password) {//todo melhorar para retornar um token de acesso
+
+        if (StringUtils.isBlank(email) || StringUtils.isBlank(password)) {
+            throw new DomainException(UserErrorEnum.INVALID_CREDENTIALS);
+        }
+
+        var user = repository.getByEmail(email);
+
+        if (user.isPresent()) {
+            if (!user.get().getPassword().equals(password))
+                throw new DomainException(UserErrorEnum.INVALID_CREDENTIALS);
+        } else {
+            throw new DomainException(UserErrorEnum.INVALID_CREDENTIALS);
+        }
+
+        return user.get();
+    }
+
+    public void deposit(UUID id, BigDecimal amount) {
         User user = this.getById(id);
         user.setBank(user.getBank().add(amount));
         repository.update(user);
     }
 
-    public void withdrawAmount(UUID id, BigDecimal amount) {
+    public void subtract(UUID id, BigDecimal amount) {
         User user = this.getById(id);
         user.setBank(user.getBank().subtract(amount));
         repository.update(user);
@@ -108,8 +122,8 @@ public class UserUseCases {
     }
 
     private static void validateCredentials(User user) {
-        if (EnumSet.of(UserTypeEnum.EXECUTIVE, UserTypeEnum.DIRECTION).contains(user.getUserType())) {
-            if (StringUtils.isBlank(user.getEmail()) || user.getEmail().length() < 5 || user.getEmail().length() > 16) {
+        if (EnumSet.of(UserTypeEnum.EXECUTIVE, UserTypeEnum.DIRECTION).contains(user.getType())) {
+            if (StringUtils.isBlank(user.getEmail()) || user.getEmail().length() < 5 || user.getEmail().length() > 100) {
                 throw new DomainException(UserErrorEnum.INVALID_USER);
             }
 

@@ -36,8 +36,8 @@ public class UserEntity {
     @Column(name = "password", length = 16)
     private String password;
 
-    @Column(name = "user_type", length = 12, nullable = false)
-    private UserTypeEnum userType;
+    @Column(name = "type", length = 12, nullable = false)
+    private UserTypeEnum type;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "unit_id")

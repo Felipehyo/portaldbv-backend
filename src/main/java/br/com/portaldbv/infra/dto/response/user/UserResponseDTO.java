@@ -16,7 +16,7 @@ public record UserResponseDTO(
         String cpf,
         String email,
         String password,
-        UserTypeEnum userType,
+        UserTypeEnum type,
         UnitEntity unit,
         Boolean active,
         Date birthDate,

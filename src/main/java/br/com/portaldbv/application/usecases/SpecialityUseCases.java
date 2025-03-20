@@ -6,22 +6,18 @@ import br.com.portaldbv.domain.enums.SpecialityCategoryEnum;
 import br.com.portaldbv.domain.enums.constant.AwsConstants;
 import br.com.portaldbv.domain.enums.error.SpecialityErrorEnum;
 import br.com.portaldbv.domain.exceptions.DomainException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 public class SpecialityUseCases {
 
     private final SpecialityRepositoryGateway repository;
     private final AwsS3UseCases awsS3UseCases;
     private final String s3BucketName;
-
-    public SpecialityUseCases(SpecialityRepositoryGateway repository, AwsS3UseCases awsS3UseCases, String s3BucketName) {
-        this.repository = repository;
-        this.awsS3UseCases = awsS3UseCases;
-        this.s3BucketName = s3BucketName;
-    }
 
     public List<Speciality> getAll(String category) {
         if (category != null && !category.trim().isEmpty()) {

@@ -16,10 +16,11 @@ public interface UserRepository extends JpaRepository<UserEntity, UUID> {
     Optional<UserEntity> getUserEntityById(UUID id);
     List<UserEntity> getUserEntityByUnitId(Long id);
     Optional<UserEntity> getUserEntityByCpf(String cpf);
+    Optional<UserEntity> getUserEntityByEmail(String email);
 
     @Query("SELECT u FROM UserEntity u WHERE u.club.id = :clubId " +
             "AND (:onlyActives = FALSE OR u.active = TRUE) " +
-            "AND (:userTypeEnum IS NULL OR u.userType IN :userTypeEnum) " +
+            "AND (:userTypeEnum IS NULL OR u.type IN :userTypeEnum) " +
             "AND (:onlyUsersWithCashValue = FALSE OR u.bank > 0)")
     List<UserEntity> findUserEntityByClubIdAndFilters(
             @Param("clubId") Long clubId,

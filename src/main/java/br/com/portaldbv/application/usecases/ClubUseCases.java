@@ -4,18 +4,16 @@ import br.com.portaldbv.application.gateways.ClubRepositoryGateway;
 import br.com.portaldbv.domain.entities.Club;
 import br.com.portaldbv.domain.enums.error.ClubErrorEnum;
 import br.com.portaldbv.domain.exceptions.DomainException;
+import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 public class ClubUseCases {
 
     private final ClubRepositoryGateway repository;
-
-    public ClubUseCases(ClubRepositoryGateway repository) {
-        this.repository = repository;
-    }
 
     public List<Club> getAll() {
         return repository.getAll();
@@ -54,7 +52,7 @@ public class ClubUseCases {
         repository.update(club);
     }
 
-    public void withdraw(Long id, BigDecimal value) {
+    public void subtract(Long id, BigDecimal value) {
         var club = getById(id);
         club.setBank(club.getBank().subtract(value));
         repository.update(club);

@@ -5,26 +5,23 @@ import br.com.portaldbv.domain.entities.Unit;
 import br.com.portaldbv.domain.enums.constant.AwsConstants;
 import br.com.portaldbv.domain.enums.error.UnitErrorEnum;
 import br.com.portaldbv.domain.exceptions.DomainException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 public class UnitUseCases {
 
     private final UnitRepositoryGateway repository;
     private final AwsS3UseCases awsS3UseCases;
+    private final ClubUseCases clubUseCases;
     private final String s3BucketName;
-
-    public UnitUseCases(UnitRepositoryGateway repository, AwsS3UseCases awsS3UseCases, String s3BucketName) {
-        this.repository = repository;
-        this.awsS3UseCases = awsS3UseCases;
-        this.s3BucketName = s3BucketName;
-    }
 
     public List<Unit> getAllByClub(Long clubId) {
         return Optional.ofNullable(repository.getAllByClubId(clubId))
-                .orElseThrow(() -> new DomainException(UnitErrorEnum.NAME_NOT_FOUND));
+                .orElseThrow(() -> new DomainException(UnitErrorEnum.INVALID_CLUB));
     }
 
     public Unit getById(Long id) {
@@ -34,7 +31,9 @@ public class UnitUseCases {
 
     public Unit register(Unit unit, MultipartFile multipartFile) {
 
-        if (repository.getByClubIdAndName(unit.getClubId(), unit.getName()) != null) {
+        var club = clubUseCases.getById(unit.getClubId());
+
+        if (repository.getByClubIdAndName(club.getId(), unit.getName()) != null) {
             throw new DomainException(UnitErrorEnum.ALREADY_REGISTERED);
         }
 

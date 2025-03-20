@@ -10,7 +10,8 @@ public enum UserErrorEnum implements ErrorDomain {
     ALREADY_REGISTERED(400, Errors.USER_ALREADY_REGISTERED),
     ID_NOT_FOUND(404, Errors.USER_ID_NOT_FOUND),
     INVALID_USER(404, Errors.INVALID_USER),
-    INVALID_PASSWORD(404, Errors.INVALID_PASSWORD);
+    INVALID_PASSWORD(404, Errors.INVALID_PASSWORD),
+    INVALID_CREDENTIALS(404, Errors.INVALID_CREDENTIALS);
 
     private final Integer httpStatusCode;
     private final String details;

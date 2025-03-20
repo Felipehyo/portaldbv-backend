@@ -2,6 +2,7 @@ package br.com.portaldbv.config;
 
 import br.com.portaldbv.application.gateways.UnitRepositoryGateway;
 import br.com.portaldbv.application.usecases.AwsS3UseCases;
+import br.com.portaldbv.application.usecases.ClubUseCases;
 import br.com.portaldbv.application.usecases.UnitUseCases;
 import br.com.portaldbv.infra.gateway.UnitRepositoryGatewayImpl;
 import br.com.portaldbv.infra.mapper.UnitMapper;
@@ -17,12 +18,15 @@ public class UnitConfiguration {
     @Autowired
     private AwsS3UseCases awsS3UseCases;
 
+    @Autowired
+    private ClubUseCases clubUseCases;
+
     @Value("${backend-configs.aws.s3.bucket}")
     private String s3BucketName;
 
     @Bean
     UnitUseCases unitUseCases(UnitRepositoryGateway repositoryGateway) {
-        return new UnitUseCases(repositoryGateway, awsS3UseCases, s3BucketName);
+        return new UnitUseCases(repositoryGateway, awsS3UseCases, clubUseCases, s3BucketName);
     }
 
     @Bean

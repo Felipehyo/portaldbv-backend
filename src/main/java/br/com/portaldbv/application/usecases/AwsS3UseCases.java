@@ -3,6 +3,7 @@ package br.com.portaldbv.application.usecases;
 import br.com.portaldbv.application.gateways.AwsS3ClientGateway;
 import br.com.portaldbv.domain.enums.error.AwsErrorEnum;
 import br.com.portaldbv.domain.exceptions.DomainException;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -11,15 +12,11 @@ import java.io.FileOutputStream;
 import java.util.UUID;
 
 @Slf4j
+@RequiredArgsConstructor
 public class AwsS3UseCases {
 
     private final AwsS3ClientGateway client;
     private final String awsRegion;
-
-    public AwsS3UseCases(AwsS3ClientGateway client, String awsRegion) {
-        this.client = client;
-        this.awsRegion = awsRegion;
-    }
 
     public String updateFile(MultipartFile multipartFile, String pathName, String imageUrl, String s3BucketName) {
         var file = convertMultiPartToFile(multipartFile);

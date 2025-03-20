@@ -17,7 +17,7 @@ public interface ClubMapper {
 
     Club toDomain(ClubRequestDTO clubRequestDTO);
 
-    ClubResponseDTO paraDTO(Club club);
+    ClubResponseDTO toDTO(Club club);
 
     List<Club> toDomainList(List<ClubEntity> clubEntities);
 }
