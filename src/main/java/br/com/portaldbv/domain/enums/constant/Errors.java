@@ -75,4 +75,11 @@ public class Errors {
     public static final String EVENT_REGISTER_ALREADY_REGISTERED = "Usuário já esta incrito no evento";
     public static final String EVENT_REGISTER_NOT_REGISTERED = "Usuário não está incrito no evento";
 
+    /**
+     * Kit Errors
+     */
+    public static final String KIT_ALREADY_REGISTERED_MESSAGE = "Kit com o nome informado já se encontra cadastrado";
+    public static final String KIT_ID_NOT_FOUND = "Kit com id informado não encontrado";
+    public static final String KIT_NAME_NOT_FOUND = "Kit com o nome informado não encontrado";
+
 }
