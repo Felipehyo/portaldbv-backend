@@ -1,8 +1,8 @@
 package br.com.portaldbv.infra.mapper;
 
 import br.com.portaldbv.domain.entities.Event;
-import br.com.portaldbv.infra.dto.request.event.EventRequestDTO;
-import br.com.portaldbv.infra.dto.response.event.EventResponseDTO;
+import br.com.portaldbv.infra.dto.event.EventRequestDTO;
+import br.com.portaldbv.infra.dto.event.EventResponseDTO;
 import br.com.portaldbv.infra.persistence.entities.EventEntity;
 import org.mapstruct.Mapper;
 

@@ -1,8 +1,8 @@
 package br.com.portaldbv.infra.mapper;
 
 import br.com.portaldbv.domain.entities.Speciality;
-import br.com.portaldbv.infra.dto.request.speciality.SpecialityRequestDTO;
-import br.com.portaldbv.infra.dto.response.speciality.SpecialityResponseDTO;
+import br.com.portaldbv.infra.dto.speciality.SpecialityRequestDTO;
+import br.com.portaldbv.infra.dto.speciality.SpecialityResponseDTO;
 import br.com.portaldbv.infra.persistence.entities.SpecialityEntity;
 import org.mapstruct.Mapper;
 

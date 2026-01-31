@@ -4,10 +4,10 @@ import br.com.portaldbv.domain.entities.User;
 import br.com.portaldbv.domain.enums.UserTypeEnum;
 import br.com.portaldbv.domain.enums.constant.Errors;
 import br.com.portaldbv.infra.dto.ErrorDTO;
-import br.com.portaldbv.infra.dto.request.user.LoginRequestDTO;
-import br.com.portaldbv.infra.dto.request.user.UserRequestDTO;
-import br.com.portaldbv.infra.dto.request.AmountRequest;
-import br.com.portaldbv.infra.dto.response.user.LoginResponseDTO;
+import br.com.portaldbv.infra.dto.user.LoginRequestDTO;
+import br.com.portaldbv.infra.dto.user.UserRequestDTO;
+import br.com.portaldbv.infra.dto.user.AmountRequestDTO;
+import br.com.portaldbv.infra.dto.user.LoginResponseDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -47,7 +47,7 @@ public interface UserResource {
             @ApiResponse(description = "Usuário logado com sucesso", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = User.class))),
             @ApiResponse(responseCode = "400", description = Errors.USER_ID_NOT_FOUND, content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDTO.class))),
     })
-    @GetMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<LoginResponseDTO> doLogin(@RequestBody LoginRequestDTO userRequest);
 
     @Operation(summary = "Cadastrar usuário", method = "POST", description = "Recurso para cadastrar usuários")
@@ -72,7 +72,7 @@ public interface UserResource {
             @ApiResponse(responseCode = "404", description = Errors.USER_ID_NOT_FOUND, content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDTO.class))),
     })
     @PatchMapping(value = "/{id}/deposit", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<Object> depositAmount(@PathVariable(value = "id") UUID id, @RequestBody AmountRequest amountRequest);
+    ResponseEntity<Object> depositAmount(@PathVariable(value = "id") UUID id, @RequestBody AmountRequestDTO amountRequest);
 
     @Operation(summary = "Sacar valor em caixa", method = "PATCH", description = "Recurso para sacar algum valor no caixa do usuário")
     @ApiResponses(value = {
@@ -80,7 +80,7 @@ public interface UserResource {
             @ApiResponse(responseCode = "404", description = Errors.USER_ID_NOT_FOUND, content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDTO.class))),
     })
     @PatchMapping(value = "/{id}/withdraw", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<Object> withdrawAmount(@PathVariable(value = "id") UUID id, @RequestBody AmountRequest amountRequest);
+    ResponseEntity<Object> withdrawAmount(@PathVariable(value = "id") UUID id, @RequestBody AmountRequestDTO amountRequest);
 
     @Operation(summary = "Deletar usuário", method = "DELETE", description = "Recurso para deletar usuários")
     @ApiResponses(value = {

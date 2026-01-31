@@ -1,8 +1,8 @@
 package br.com.portaldbv.infra.mapper;
 
 import br.com.portaldbv.domain.entities.Club;
-import br.com.portaldbv.infra.dto.request.club.ClubRequestDTO;
-import br.com.portaldbv.infra.dto.response.club.ClubResponseDTO;
+import br.com.portaldbv.infra.dto.club.ClubRequestDTO;
+import br.com.portaldbv.infra.dto.club.ClubResponseDTO;
 import br.com.portaldbv.infra.persistence.entities.ClubEntity;
 import org.mapstruct.Mapper;
 

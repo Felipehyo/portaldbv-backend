@@ -2,7 +2,7 @@ package br.com.portaldbv.infra.controller;
 
 import br.com.portaldbv.application.usecases.KitUseCases;
 import br.com.portaldbv.domain.entities.Kit;
-import br.com.portaldbv.infra.dto.request.kit.KitRequestDTO;
+import br.com.portaldbv.infra.dto.kit.KitRequestDTO;
 import br.com.portaldbv.infra.mapper.KitMapper;
 import br.com.portaldbv.infra.resource.KitResource;
 import lombok.RequiredArgsConstructor;

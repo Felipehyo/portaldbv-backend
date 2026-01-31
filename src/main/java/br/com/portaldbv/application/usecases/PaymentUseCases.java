@@ -5,7 +5,9 @@ import br.com.portaldbv.domain.entities.Payment;
 import br.com.portaldbv.domain.enums.EventTypeRegisterEnum;
 import br.com.portaldbv.domain.enums.error.PaymentErrorEnum;
 import br.com.portaldbv.domain.exceptions.DomainException;
+import br.com.portaldbv.infra.dto.PaginatedResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -21,7 +23,7 @@ public class PaymentUseCases {
     private final EventRegisterUseCases eventRegisterUseCases;
     private final UserUseCases userUseCases;
 
-    public List<Payment> getAllByClubWithFilters(Long clubId, LocalDate initialDate, LocalDate finalDate, UUID userId, Long eventId, Integer page, Integer size) {
+    public PaginatedResponse<Payment> getAllByClubWithFilters(Long clubId, LocalDate initialDate, LocalDate finalDate, UUID userId, Long eventId, Integer page, Integer size) {
         return repository.getAllByClubWithFilters(clubId, initialDate, finalDate, userId, eventId, page, size);
     }
 

@@ -1,11 +1,13 @@
 package br.com.portaldbv.infra.mapper;
 
 import br.com.portaldbv.domain.entities.Payment;
-import br.com.portaldbv.infra.dto.request.payment.PaymentRequestDTO;
-import br.com.portaldbv.infra.dto.response.payment.PaymentDetailResponseDTO;
-import br.com.portaldbv.infra.dto.response.payment.PaymentResponseDTO;
+import br.com.portaldbv.infra.dto.PaginatedResponse;
+import br.com.portaldbv.infra.dto.payment.PaymentRequestDTO;
+import br.com.portaldbv.infra.dto.payment.PaymentDetailResponseDTO;
+import br.com.portaldbv.infra.dto.payment.PaymentResponseDTO;
 import br.com.portaldbv.infra.persistence.entities.PaymentEntity;
 import org.mapstruct.Mapper;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -23,5 +25,5 @@ public interface PaymentMapper {
 
     List<Payment> toDomainList(List<PaymentEntity> paymentEntities);
 
-    List<PaymentDetailResponseDTO> toReponseList(List<Payment> payments);
+    PaginatedResponse<PaymentDetailResponseDTO> toResponseList(PaginatedResponse<Payment> payments);
 }

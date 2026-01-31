@@ -54,6 +54,7 @@ public class EventUseCases {
         oldEvent.setDate(event.getDate());
         oldEvent.setValue(event.getValue());
         oldEvent.setName(event.getName());
+        oldEvent.setActive(event.getActive());
 
         return repository.update(oldEvent);
     }

@@ -2,7 +2,7 @@ package br.com.portaldbv.infra.controller;
 
 import br.com.portaldbv.application.usecases.RefundUseCases;
 import br.com.portaldbv.domain.entities.Refund;
-import br.com.portaldbv.infra.dto.request.refund.RefundRequestDTO;
+import br.com.portaldbv.infra.dto.refund.RefundRequestDTO;
 import br.com.portaldbv.infra.mapper.RefundMapper;
 import br.com.portaldbv.infra.resource.RefundResource;
 import lombok.RequiredArgsConstructor;

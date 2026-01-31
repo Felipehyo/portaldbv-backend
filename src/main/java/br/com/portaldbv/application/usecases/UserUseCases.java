@@ -35,7 +35,7 @@ public class UserUseCases {
 
     public User register(User user, Long clubId, Long unitId) {
 
-        cpfValidate(user);
+        userValidate(user);
 
         user.setClub(clubUseCases.getById(clubId));
 
@@ -52,8 +52,9 @@ public class UserUseCases {
         return repository.register(user);
     }
 
-    private void cpfValidate(User user) {
-        if (repository.getByCpf(user.getCpf()) != null) throw new DomainException(UserErrorEnum.ALREADY_REGISTERED);
+    private void userValidate(User user) {
+//        if (repository.getByCpf(user.getCpf()) != null) throw new DomainException(UserErrorEnum.ALREADY_REGISTERED);
+        if (repository.getByEmail(user.getEmail()).isPresent()) throw new DomainException(UserErrorEnum.ALREADY_REGISTERED);
     }
 
     public User update(UUID id, User user, Long unitId) {
@@ -61,7 +62,7 @@ public class UserUseCases {
 
         if (!StringUtils.isBlank(user.getName())) oldUser.setName(user.getName());
         if (!StringUtils.isBlank(user.getCpf()) && !oldUser.getCpf().equals(user.getCpf())) {
-            cpfValidate(user);
+            userValidate(user);
             oldUser.setCpf(user.getCpf());
         }
         if (user.getBirthDate() != null) oldUser.setBirthDate(user.getBirthDate());
@@ -122,18 +123,18 @@ public class UserUseCases {
     }
 
     private static void validateCredentials(User user) {
-        if (EnumSet.of(UserTypeEnum.EXECUTIVE, UserTypeEnum.DIRECTION).contains(user.getType())) {
-            if (StringUtils.isBlank(user.getEmail()) || user.getEmail().length() < 5 || user.getEmail().length() > 100) {
-                throw new DomainException(UserErrorEnum.INVALID_USER);
-            }
-
-            if (StringUtils.isBlank(user.getPassword()) || user.getPassword().length() < 5 || user.getPassword().length() > 16) {
-                throw new DomainException(UserErrorEnum.INVALID_PASSWORD);
-            }
-        } else {
-            user.setEmail(null);
-            user.setPassword(null);
-        }
+//        if (EnumSet.of(UserTypeEnum.EXECUTIVE, UserTypeEnum.DIRECTION).contains(user.getType())) {
+//            if (StringUtils.isBlank(user.getEmail()) || user.getEmail().length() < 5 || user.getEmail().length() > 100) {
+//                throw new DomainException(UserErrorEnum.INVALID_USER);
+//            }
+//
+//            if (StringUtils.isBlank(user.getPassword()) || user.getPassword().length() < 5 || user.getPassword().length() > 16) {
+//                throw new DomainException(UserErrorEnum.INVALID_PASSWORD);
+//            }
+//        } else {
+//            user.setEmail(null);
+//            user.setPassword(null);
+//        }
     }
 
 }

@@ -1,8 +1,8 @@
 package br.com.portaldbv.infra.mapper;
 
 import br.com.portaldbv.domain.entities.User;
-import br.com.portaldbv.infra.dto.request.user.UserRequestDTO;
-import br.com.portaldbv.infra.dto.response.user.UserResponseDTO;
+import br.com.portaldbv.infra.dto.user.UserRequestDTO;
+import br.com.portaldbv.infra.dto.user.UserResponseDTO;
 import br.com.portaldbv.infra.persistence.entities.UserEntity;
 import org.mapstruct.Mapper;
 

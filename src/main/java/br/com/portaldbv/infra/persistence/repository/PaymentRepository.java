@@ -2,6 +2,7 @@ package br.com.portaldbv.infra.persistence.repository;
 
 import br.com.portaldbv.infra.persistence.entities.PaymentEntity;
 import jakarta.websocket.server.PathParam;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -21,7 +22,7 @@ public interface PaymentRepository extends JpaRepository<PaymentEntity, UUID> {
             "AND (COALESCE(:userId, NULL) IS NULL OR p.user.id = :userId) " +
             "AND (:eventId IS NULL OR p.event.id = :eventId) " +
             "AND (:startDate IS NULL AND :endDate IS NULL OR p.date BETWEEN :startDate AND :endDate)")
-    List<PaymentEntity> findAllByClubWithFilters(
+    Page<PaymentEntity> findAllByClubWithFilters(
             @Param("clubId") Long clubId,
             @Param("userId") UUID userId,
             @Param("eventId") Long eventId,

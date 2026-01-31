@@ -2,8 +2,8 @@ package br.com.portaldbv.infra.controller;
 
 import br.com.portaldbv.application.usecases.ClubUseCases;
 import br.com.portaldbv.domain.entities.Club;
-import br.com.portaldbv.infra.dto.request.club.BankRequestDTO;
-import br.com.portaldbv.infra.dto.request.club.ClubRequestDTO;
+import br.com.portaldbv.infra.dto.club.BankRequestDTO;
+import br.com.portaldbv.infra.dto.club.ClubRequestDTO;
 import br.com.portaldbv.infra.mapper.ClubMapper;
 import br.com.portaldbv.infra.resource.ClubResource;
 import org.springframework.http.HttpStatus;

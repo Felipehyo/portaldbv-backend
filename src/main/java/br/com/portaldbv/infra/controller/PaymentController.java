@@ -1,7 +1,7 @@
 package br.com.portaldbv.infra.controller;
 
 import br.com.portaldbv.application.usecases.PaymentUseCases;
-import br.com.portaldbv.infra.dto.request.payment.PaymentRequestDTO;
+import br.com.portaldbv.infra.dto.payment.PaymentRequestDTO;
 import br.com.portaldbv.infra.mapper.PaymentMapper;
 import br.com.portaldbv.infra.resource.PaymentResource;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,8 @@ public class PaymentController implements PaymentResource {
     @Override
     public ResponseEntity<Object> getAllByClubWithFilters(Long clubId, LocalDate startDate, LocalDate endDate, UUID userId, Long eventId, Pageable pageable) {
         var payments = useCases.getAllByClubWithFilters(clubId, startDate, endDate, userId, eventId, pageable.getPageNumber(), pageable.getPageSize());
-        return ResponseEntity.status(HttpStatus.OK).body(mapper.toReponseList(payments));
+
+        return ResponseEntity.status(HttpStatus.OK).body(mapper.toResponseList(payments));
     }
 
     @Override

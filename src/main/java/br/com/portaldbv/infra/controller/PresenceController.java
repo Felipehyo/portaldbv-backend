@@ -2,7 +2,7 @@ package br.com.portaldbv.infra.controller;
 
 import br.com.portaldbv.application.usecases.PresenceUseCases;
 import br.com.portaldbv.domain.entities.Presence;
-import br.com.portaldbv.infra.dto.request.presence.PresenceRequestDTO;
+import br.com.portaldbv.infra.dto.presence.PresenceRequestDTO;
 import br.com.portaldbv.infra.mapper.PresenceMapper;
 import br.com.portaldbv.infra.resource.PresenceResource;
 import lombok.RequiredArgsConstructor;

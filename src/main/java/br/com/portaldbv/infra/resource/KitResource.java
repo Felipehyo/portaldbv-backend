@@ -3,7 +3,7 @@ package br.com.portaldbv.infra.resource;
 import br.com.portaldbv.domain.entities.Kit;
 import br.com.portaldbv.domain.enums.constant.Errors;
 import br.com.portaldbv.infra.dto.ErrorDTO;
-import br.com.portaldbv.infra.dto.request.kit.KitRequestDTO;
+import br.com.portaldbv.infra.dto.kit.KitRequestDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

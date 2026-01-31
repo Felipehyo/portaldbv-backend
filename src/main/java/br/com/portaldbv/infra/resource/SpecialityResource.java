@@ -3,7 +3,7 @@ package br.com.portaldbv.infra.resource;
 import br.com.portaldbv.domain.entities.Club;
 import br.com.portaldbv.domain.enums.constant.Errors;
 import br.com.portaldbv.infra.dto.ErrorDTO;
-import br.com.portaldbv.infra.dto.request.speciality.SpecialityRequestDTO;
+import br.com.portaldbv.infra.dto.speciality.SpecialityRequestDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

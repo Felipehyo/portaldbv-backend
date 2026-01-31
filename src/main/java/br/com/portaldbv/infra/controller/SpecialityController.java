@@ -1,7 +1,7 @@
 package br.com.portaldbv.infra.controller;
 
 import br.com.portaldbv.application.usecases.SpecialityUseCases;
-import br.com.portaldbv.infra.dto.request.speciality.SpecialityRequestDTO;
+import br.com.portaldbv.infra.dto.speciality.SpecialityRequestDTO;
 import br.com.portaldbv.infra.mapper.SpecialityMapper;
 import br.com.portaldbv.infra.resource.SpecialityResource;
 import com.fasterxml.jackson.core.JsonProcessingException;

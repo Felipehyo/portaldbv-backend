@@ -10,7 +10,8 @@ public enum UserTypeEnum {
     EXECUTIVE("EXECUTIVE"),
     DIRECTION("DIRECTION"),
     PATHFINDER("PATHFINDER"),
-    EVENTUAL("EVENTUAL");
+    EVENTUAL("EVENTUAL"),
+    ADMIN("ADMIN");
 
     public final String description;
 

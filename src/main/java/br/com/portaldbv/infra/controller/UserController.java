@@ -2,10 +2,10 @@ package br.com.portaldbv.infra.controller;
 
 import br.com.portaldbv.application.usecases.UserUseCases;
 import br.com.portaldbv.domain.enums.UserTypeEnum;
-import br.com.portaldbv.infra.dto.request.AmountRequest;
-import br.com.portaldbv.infra.dto.request.user.LoginRequestDTO;
-import br.com.portaldbv.infra.dto.request.user.UserRequestDTO;
-import br.com.portaldbv.infra.dto.response.user.LoginResponseDTO;
+import br.com.portaldbv.infra.dto.user.AmountRequestDTO;
+import br.com.portaldbv.infra.dto.user.LoginRequestDTO;
+import br.com.portaldbv.infra.dto.user.UserRequestDTO;
+import br.com.portaldbv.infra.dto.user.LoginResponseDTO;
 import br.com.portaldbv.infra.mapper.UserMapper;
 import br.com.portaldbv.infra.resource.UserResource;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -38,7 +38,7 @@ public class UserController implements UserResource {
     @Override
     public ResponseEntity<LoginResponseDTO> doLogin(LoginRequestDTO userRequest) {
         var user = useCases.doLogin(userRequest.email(), userRequest.password());
-        return ResponseEntity.status(HttpStatus.OK).body(new LoginResponseDTO(user.getId(), user.getClub().getId()));
+        return ResponseEntity.status(HttpStatus.OK).body(new LoginResponseDTO(user.getId(), user.getType(), user.getClub().getId()));
     }
 
     @Override
@@ -54,13 +54,13 @@ public class UserController implements UserResource {
     }
 
     @Override
-    public ResponseEntity<Object> depositAmount(UUID id, AmountRequest request) {
+    public ResponseEntity<Object> depositAmount(UUID id, AmountRequestDTO request) {
         useCases.deposit(id, request.amount());
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @Override
-    public ResponseEntity<Object> withdrawAmount(UUID id, AmountRequest request) {
+    public ResponseEntity<Object> withdrawAmount(UUID id, AmountRequestDTO request) {
         useCases.subtract(id, request.amount());
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
