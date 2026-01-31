@@ -10,8 +10,8 @@
     </parent>
 
     <groupId>br.com</groupId>
-    <artifactId>portaldbv</artifactId>
-    <version>1.0.1</version>
+    <artifactId>portaldbv-backend</artifactId>
+    <version>1.2.0</version>
     <name>Portal DBV</name>
     <description>Sistema de gerenciamento de clubes de desbravadores</description>
 

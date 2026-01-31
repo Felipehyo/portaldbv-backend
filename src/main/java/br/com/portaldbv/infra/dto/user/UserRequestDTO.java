@@ -18,6 +18,7 @@ public record UserRequestDTO(
         UserTypeEnum type,
         Long unitId,
         Date birthDate,
+        Boolean active,
         @NotNull(message = "O campo sexo deve ser informado!")
         GenderEnum gender
 
