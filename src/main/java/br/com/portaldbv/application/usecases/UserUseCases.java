@@ -54,7 +54,10 @@ public class UserUseCases {
 
     private void userValidate(User user) {
 //        if (repository.getByCpf(user.getCpf()) != null) throw new DomainException(UserErrorEnum.ALREADY_REGISTERED);
-        if (repository.getByEmail(user.getEmail()).isPresent()) throw new DomainException(UserErrorEnum.ALREADY_REGISTERED);
+        if (!StringUtils.isBlank(user.getEmail())) {
+            if (repository.getByEmail(user.getEmail()).isPresent())
+                throw new DomainException(UserErrorEnum.ALREADY_REGISTERED);
+        }
     }
 
     public User update(UUID id, User user, Long unitId) {
