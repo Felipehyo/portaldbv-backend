@@ -21,6 +21,7 @@ public class VirtualMinutes {
     private LocalDate date; // Data da ata (sem hora)
     private String description; // Descrição da secretaria ou capelania
     private List<String> imageLinks; // Links das fotos no S3 (máximo 3 para secretaria)
+    private List<User> presentUsers; // Usuários presentes (apenas secretaria)
     private Unit unit; // Vinculado à unidade
     private User createdBy; // Usuário que criou
     private LocalDateTime createdAt; // Data e hora de criação do registro
@@ -28,4 +29,3 @@ public class VirtualMinutes {
     private Boolean active;
 
 }
-

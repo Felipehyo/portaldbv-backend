@@ -45,7 +45,7 @@ public class VirtualMinutesUseCases {
                 .orElseThrow(() -> new DomainException(VirtualMinutesErrorEnum.ID_NOT_FOUND));
     }
 
-    public VirtualMinutes registerSecretaria(VirtualMinutes virtualMinutes, Long unitId, UUID userId, List<MultipartFile> images) {
+    public VirtualMinutes registerSecretaria(VirtualMinutes virtualMinutes, Long unitId, UUID userId, List<MultipartFile> images, List<UUID> presentUserIds) {
         // Validar unidade e usuário
         virtualMinutes.setUnit(unitUseCases.getById(unitId));
         virtualMinutes.setCreatedBy(userUseCases.getById(userId));
@@ -71,6 +71,15 @@ public class VirtualMinutesUseCases {
                 }
             }
             virtualMinutes.setImageLinks(imageLinks);
+        }
+
+        // Associar usuários presentes (apenas para secretaria) se informados
+        if (presentUserIds != null && !presentUserIds.isEmpty()) {
+            var presentUsers = new ArrayList<br.com.portaldbv.domain.entities.User>();
+            for (UUID puid : presentUserIds) {
+                presentUsers.add(userUseCases.getById(puid));
+            }
+            virtualMinutes.setPresentUsers(presentUsers);
         }
 
         virtualMinutes.setActive(Boolean.TRUE);

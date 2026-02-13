@@ -19,7 +19,8 @@ public record VirtualMinutesResponseDTO(
         String createdByUserName,
         LocalDateTime createdAt,
         LocalDateTime updatedAt,
-        Boolean active
+        Boolean active,
+        // Nomes dos usuários presentes (formatados)
+        List<String> presentUserNames
 ) {
 }
-

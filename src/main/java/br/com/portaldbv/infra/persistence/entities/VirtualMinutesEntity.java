@@ -36,6 +36,14 @@ public class VirtualMinutesEntity {
     @Column(length = 1500)
     private String imageLinks;
 
+    @ManyToMany
+    @JoinTable(
+            name = "VIRTUAL_MINUTES_PRESENT_USERS",
+            joinColumns = @JoinColumn(name = "virtual_minutes_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private java.util.List<UserEntity> presentUsers;
+
     @ManyToOne
     @JoinColumn(name = "unit_id")
     private UnitEntity unit;
@@ -65,4 +73,3 @@ public class VirtualMinutesEntity {
     }
 
 }
-

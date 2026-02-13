@@ -3,6 +3,7 @@ package br.com.portaldbv.infra.gateway;
 import br.com.portaldbv.application.gateways.VirtualMinutesRepositoryGateway;
 import br.com.portaldbv.domain.entities.VirtualMinutes;
 import br.com.portaldbv.domain.enums.MinutesTypeEnum;
+import br.com.portaldbv.infra.mapper.UserMapper;
 import br.com.portaldbv.infra.mapper.VirtualMinutesMapper;
 import br.com.portaldbv.infra.persistence.entities.VirtualMinutesEntity;
 import br.com.portaldbv.infra.persistence.repository.VirtualMinutesRepository;
@@ -19,6 +20,7 @@ public class VirtualMinutesRepositoryGatewayImpl implements VirtualMinutesReposi
 
     private final VirtualMinutesRepository virtualMinutesRepository;
     private final VirtualMinutesMapper mapper;
+    private final UserMapper userMapper;
 
     @Override
     public List<VirtualMinutes> getAllByUnitIdAndFilters(Long unitId, Boolean onlyActives) {
@@ -78,6 +80,10 @@ public class VirtualMinutesRepositoryGatewayImpl implements VirtualMinutesReposi
         if (entity.getImageLinks() != null && !entity.getImageLinks().isEmpty()) {
             domain.setImageLinks(Arrays.asList(entity.getImageLinks().split(",")));
         }
+        // converter presentUsers usando UserMapper
+        if (entity.getPresentUsers() != null && !entity.getPresentUsers().isEmpty()) {
+            domain.setPresentUsers(entity.getPresentUsers().stream().map(userMapper::toDomain).collect(Collectors.toList()));
+        }
         return domain;
     }
 
@@ -86,8 +92,11 @@ public class VirtualMinutesRepositoryGatewayImpl implements VirtualMinutesReposi
         if (domain.getImageLinks() != null && !domain.getImageLinks().isEmpty()) {
             entity.setImageLinks(String.join(",", domain.getImageLinks()));
         }
+        // converter presentUsers usando UserMapper
+        if (domain.getPresentUsers() != null && !domain.getPresentUsers().isEmpty()) {
+            entity.setPresentUsers(domain.getPresentUsers().stream().map(userMapper::toEntity).collect(Collectors.toList()));
+        }
         return entity;
     }
 
 }
-

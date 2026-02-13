@@ -25,6 +25,9 @@ public class VirtualMinutesConfiguration {
     @Autowired
     private AwsS3UseCases awsS3UseCases;
 
+    @Autowired
+    private br.com.portaldbv.infra.mapper.UserMapper userMapper;
+
     @Value("${backend-configs.aws.s3.bucket}")
     private String s3BucketName;
 
@@ -35,8 +38,7 @@ public class VirtualMinutesConfiguration {
 
     @Bean
     VirtualMinutesRepositoryGatewayImpl virtualMinutesRepositoryGateway(VirtualMinutesRepository repository, VirtualMinutesMapper mapper) {
-        return new VirtualMinutesRepositoryGatewayImpl(repository, mapper);
+        return new VirtualMinutesRepositoryGatewayImpl(repository, mapper, userMapper);
     }
 
 }
-

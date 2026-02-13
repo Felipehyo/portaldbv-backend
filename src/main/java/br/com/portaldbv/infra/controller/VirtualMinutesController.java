@@ -47,7 +47,7 @@ public class VirtualMinutesController implements VirtualMinutesResource {
             }
         }
 
-        var domain = useCases.registerSecretaria(mapper.toDomain(request), unitId, userId, images);
+        var domain = useCases.registerSecretaria(mapper.toDomain(request), unitId, userId, images, request.presentUserIds());
         return ResponseEntity.status(HttpStatus.CREATED).body(mapper.toDTO(domain));
     }
 
@@ -94,4 +94,3 @@ public class VirtualMinutesController implements VirtualMinutesResource {
     }
 
 }
-
