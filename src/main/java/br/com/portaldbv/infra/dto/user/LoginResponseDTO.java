@@ -8,6 +8,7 @@ public record LoginResponseDTO(
 
         UUID userId,
         UserTypeEnum type,
-        Long clubId
+        Long clubId,
+        Long unitId
 ) {
 }

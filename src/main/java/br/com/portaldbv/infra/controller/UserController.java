@@ -25,8 +25,8 @@ public class UserController implements UserResource {
     private final UserMapper mapper;
 
     @Override
-    public ResponseEntity<Object> getAllByClubId(Long clubId, Boolean onlyActives, Boolean onlyUsersWithCashValue, List<UserTypeEnum> userTypeList) {
-        var users = useCases.getAllByClub(clubId, onlyActives, onlyUsersWithCashValue, userTypeList);
+    public ResponseEntity<Object> getAllByClubId(Long clubId, Long unitId, Boolean onlyActives, Boolean onlyUsersWithCashValue, List<UserTypeEnum> userTypeList) {
+        var users = useCases.getAllByClub(clubId, unitId, onlyActives, onlyUsersWithCashValue, userTypeList);
         return ResponseEntity.status(HttpStatus.OK).body(mapper.toReponseList(users));
     }
 
@@ -38,7 +38,7 @@ public class UserController implements UserResource {
     @Override
     public ResponseEntity<LoginResponseDTO> doLogin(LoginRequestDTO userRequest) {
         var user = useCases.doLogin(userRequest.email(), userRequest.password());
-        return ResponseEntity.status(HttpStatus.OK).body(new LoginResponseDTO(user.getId(), user.getType(), user.getClub().getId()));
+        return ResponseEntity.status(HttpStatus.OK).body(new LoginResponseDTO(user.getId(), user.getType(), user.getClub().getId(), user.getUnit().getId()));
     }
 
     @Override

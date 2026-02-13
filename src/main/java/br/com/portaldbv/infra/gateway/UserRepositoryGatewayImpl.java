@@ -34,8 +34,8 @@ public class UserRepositoryGatewayImpl implements UserRepositoryGateway {
     }
 
     @Override
-    public List<User> getAllByClubId(Long clubId, Boolean onlyActives, Boolean onlyUsersWithCashValue, List<UserTypeEnum> userTypes) {
-        List<UserEntity> users = userRepository.findUserEntityByClubIdAndFilters(clubId, onlyActives, userTypes, onlyUsersWithCashValue);
+    public List<User> getAllByClubId(Long clubId, Long unitId, Boolean onlyActives, Boolean onlyUsersWithCashValue, List<UserTypeEnum> userTypes) {
+        List<UserEntity> users = userRepository.findUserEntityByClubIdAndFilters(clubId, unitId, onlyActives, userTypes, onlyUsersWithCashValue);
         return mapper.toDomainList(users);
     }
 

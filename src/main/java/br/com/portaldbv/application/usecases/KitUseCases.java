@@ -54,7 +54,7 @@ public class KitUseCases {
     }
 
     public List<KitMetricsDTO> getAllMetricsByClub(Long clubId) {
-        var users = userUseCases.getAllByClub(clubId, Boolean.TRUE, Boolean.FALSE, List.of(UserTypeEnum.PATHFINDER, UserTypeEnum.DIRECTION, UserTypeEnum.EXECUTIVE));
+        var users = userUseCases.getAllByClub(clubId, null, Boolean.TRUE, Boolean.FALSE, List.of(UserTypeEnum.PATHFINDER, UserTypeEnum.DIRECTION, UserTypeEnum.EXECUTIVE));
 
         var metrics = new ArrayList<KitMetricsDTO>();
 

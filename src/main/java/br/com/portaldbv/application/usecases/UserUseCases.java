@@ -20,8 +20,9 @@ public class UserUseCases {
     private final ClubUseCases clubUseCases;
     private final UnitUseCases unitUseCases;
 
-    public List<User> getAllByClub(Long clubId, Boolean onlyActives, Boolean onlyUsersWithCashValue, List<UserTypeEnum> userTypeList) {
+    public List<User> getAllByClub(Long clubId, Long unitId, Boolean onlyActives, Boolean onlyUsersWithCashValue, List<UserTypeEnum> userTypeList) {
         return Optional.ofNullable(repository.getAllByClubId(clubId,
+                        unitId,
                         (onlyActives != null ? onlyActives : Boolean.TRUE),
                         (onlyUsersWithCashValue != null ? onlyUsersWithCashValue : Boolean.FALSE),
                         (userTypeList != null ? userTypeList : EnumSet.allOf(UserTypeEnum.class).stream().toList())))

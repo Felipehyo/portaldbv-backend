@@ -4,5 +4,6 @@ public class AwsConstants {
 
     public static final String S3_PATH_NAME = "specialities";
     public static final String S3_PATH_UNIT = "units";
+    public static final String S3_PATH_VIRTUAL_MINUTES = "virtual-minutes";
 
 }

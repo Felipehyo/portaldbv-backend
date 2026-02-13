@@ -12,7 +12,7 @@ public interface UserRepositoryGateway {
     User getById(UUID id);
     User getByCpf(String cpf);
 
-    List<User> getAllByClubId(Long clubId, Boolean onlyActives, Boolean onlyUsersWithCashValue, List<UserTypeEnum> userTypeEnum);
+    List<User> getAllByClubId(Long clubId, Long unitId, Boolean onlyActives, Boolean onlyUsersWithCashValue, List<UserTypeEnum> userTypeEnum);
 
     List<User> getByUnit(Long unitId);
 

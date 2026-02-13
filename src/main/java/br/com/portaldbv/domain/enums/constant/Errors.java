@@ -82,4 +82,14 @@ public class Errors {
     public static final String KIT_ID_NOT_FOUND = "Kit com id informado não encontrado";
     public static final String KIT_NAME_NOT_FOUND = "Kit com o nome informado não encontrado";
 
+    /**
+     * Virtual Minutes Errors
+     */
+    public static final String VIRTUAL_MINUTES_ALREADY_REGISTERED_MESSAGE = "Já existe uma ata deste tipo para esta unidade nesta data";
+    public static final String VIRTUAL_MINUTES_NOT_FOUND = "Ata virtual não encontrada";
+    public static final String VIRTUAL_MINUTES_ID_NOT_FOUND = "Ata virtual com id informado não encontrada";
+    public static final String VIRTUAL_MINUTES_INVALID_UNIT = "Unidade informada é inválida";
+    public static final String VIRTUAL_MINUTES_INVALID_USER = "Usuário informado é inválido";
+    public static final String VIRTUAL_MINUTES_MAX_IMAGES_EXCEEDED = "Máximo de 3 imagens permitidas por ata de secretaria";
+
 }

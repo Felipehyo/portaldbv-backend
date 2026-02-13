@@ -26,7 +26,7 @@ public class PresenceUseCases {
     public List<PresencePercentageMetricsDTO> getAllWithPercentage(Long clubId) {
 
         List<Presence> presences = repository.getAllByClubId(clubId);
-        List<User> users = userUseCases.getAllByClub(clubId, Boolean.TRUE, Boolean.FALSE, null);
+        List<User> users = userUseCases.getAllByClub(clubId, null, Boolean.TRUE, Boolean.FALSE, null);
 
         var percents = new ArrayList<PresencePercentageMetricsDTO>();
         List<String> countDates = new ArrayList<>();

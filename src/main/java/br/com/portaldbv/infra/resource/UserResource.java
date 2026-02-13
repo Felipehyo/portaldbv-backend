@@ -32,7 +32,7 @@ public interface UserResource {
             @ApiResponse(description = "Usuários encontrados", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = List.class))),
     })
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<Object> getAllByClubId(@RequestParam(value = "clubId") Long clubId, @RequestParam(value = "onlyActives", required = false) Boolean onlyActives, @RequestParam(value = "onlyUsersWithCashValue", required = false) Boolean onlyUsersWithCashValue, @RequestParam(value = "type", required = false) List<UserTypeEnum> userTypeList);
+    ResponseEntity<Object> getAllByClubId(@RequestParam(value = "clubId") Long clubId, @RequestParam(value = "unitId", required = false) Long unitId, @RequestParam(value = "onlyActives", required = false) Boolean onlyActives, @RequestParam(value = "onlyUsersWithCashValue", required = false) Boolean onlyUsersWithCashValue, @RequestParam(value = "type", required = false) List<UserTypeEnum> userTypeList);
 
     @Operation(summary = "Buscar por id", method = "GET", description = "Recurso para consultar usuário por id")
     @ApiResponses(value = {

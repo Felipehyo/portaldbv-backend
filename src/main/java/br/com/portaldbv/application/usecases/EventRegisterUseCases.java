@@ -99,7 +99,7 @@ public class EventRegisterUseCases {
 
         var event = eventUseCases.getById(eventId);
         var eventRegisters = repository.getAllByEventRegisterIdAndUserTypes(eventId, Arrays.stream(UserTypeEnum.values()).toList());
-        var users = userUseCases.getAllByClub(event.getClub().getId(), Boolean.TRUE, Boolean.FALSE, Arrays.stream(UserTypeEnum.values()).toList());
+        var users = userUseCases.getAllByClub(event.getClub().getId(), null, Boolean.TRUE, Boolean.FALSE, Arrays.stream(UserTypeEnum.values()).toList());
 
         var responseList = new ArrayList<UserEventRegisterDTO>();
 
