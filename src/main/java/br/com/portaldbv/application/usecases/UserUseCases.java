@@ -74,8 +74,16 @@ public class UserUseCases {
         if (user.getActive() != null) oldUser.setActive(user.getActive());
         if (user.getType() != null) oldUser.setType(user.getType());
 
-        validateCredentials(user);
-        if (!StringUtils.isBlank(user.getEmail())) oldUser.setEmail(user.getEmail());
+        // Validação de unicidade do email (username)
+        if (!StringUtils.isBlank(user.getEmail()) && !user.getEmail().equals(oldUser.getEmail())) {
+            var existing = repository.getByEmail(user.getEmail());
+            if (existing.isPresent()) {
+                // se existir outro usuário com o mesmo email, lançar exceção
+                throw new DomainException(UserErrorEnum.ALREADY_REGISTERED);
+            }
+            oldUser.setEmail(user.getEmail());
+        }
+
         if (!StringUtils.isBlank(user.getPassword())) oldUser.setPassword(user.getPassword());
 
         if (unitId != null) {
@@ -90,6 +98,21 @@ public class UserUseCases {
         }
 
         return repository.update(oldUser);
+    }
+
+    public void changePassword(UUID id, String currentPassword, String newPassword) {
+        var user = getById(id);
+
+        if (StringUtils.isBlank(currentPassword) || StringUtils.isBlank(newPassword)) {
+            throw new DomainException(UserErrorEnum.INVALID_PASSWORD);
+        }
+
+        if (!user.getPassword().equals(currentPassword)) {
+            throw new DomainException(UserErrorEnum.INVALID_CREDENTIALS);
+        }
+
+        user.setPassword(newPassword);
+        repository.update(user);
     }
 
     public User doLogin(String email, String password) {//todo melhorar para retornar um token de acesso

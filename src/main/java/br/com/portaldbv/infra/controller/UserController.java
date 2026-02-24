@@ -6,6 +6,7 @@ import br.com.portaldbv.infra.dto.user.AmountRequestDTO;
 import br.com.portaldbv.infra.dto.user.LoginRequestDTO;
 import br.com.portaldbv.infra.dto.user.UserRequestDTO;
 import br.com.portaldbv.infra.dto.user.LoginResponseDTO;
+import br.com.portaldbv.infra.dto.user.PasswordChangeRequestDTO;
 import br.com.portaldbv.infra.mapper.UserMapper;
 import br.com.portaldbv.infra.resource.UserResource;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -15,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Component
@@ -51,6 +53,12 @@ public class UserController implements UserResource {
     public ResponseEntity<Object> update(UUID id, UserRequestDTO userRequest) throws JsonProcessingException {
         var user = useCases.update(id, mapper.toDomain(userRequest), userRequest.unitId());
         return ResponseEntity.status(HttpStatus.OK).body(mapper.toResponse(user));
+    }
+
+    @Override
+    public ResponseEntity<Object> changePassword(UUID id, PasswordChangeRequestDTO request) {
+        useCases.changePassword(id, request.currentPassword(), request.newPassword());
+        return ResponseEntity.status(HttpStatus.OK).body(Map.of("message", "PASSWORD_UPDATED"));
     }
 
     @Override

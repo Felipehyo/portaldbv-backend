@@ -90,5 +90,13 @@ public interface UserResource {
     @DeleteMapping(value = "/{id}")
     ResponseEntity<Object> delete(@PathVariable(value = "id") UUID id);
 
+    @Operation(summary = "Alterar senha do usuário", method = "PATCH", description = "Recurso para alterar a senha do usuário; exige a senha atual")
+    @ApiResponses(value = {
+            @ApiResponse(description = "Senha alterada com sucesso", responseCode = "200", content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "401", description = "Senha atual inválida", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDTO.class)))
+    })
+    @PatchMapping(value = "/{id}/password", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<Object> changePassword(@PathVariable(value = "id") UUID id, @RequestBody br.com.portaldbv.infra.dto.user.PasswordChangeRequestDTO request);
 
 }
+
