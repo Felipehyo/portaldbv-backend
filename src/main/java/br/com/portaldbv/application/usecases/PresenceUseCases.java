@@ -13,8 +13,11 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class PresenceUseCases {
@@ -56,7 +59,30 @@ public class PresenceUseCases {
     }
 
     public List<Presence> getAllByDay(Long clubId, LocalDate date) {
-        return repository.getByClubIdAndUserActiveAndDateEquals(clubId, Boolean.TRUE, (date != null ? date : LocalDate.now(ZoneId.of("America/Sao_Paulo"))));
+        LocalDate targetDate = (date != null ? date : LocalDate.now(ZoneId.of("America/Sao_Paulo")));
+
+        List<Presence> presences = repository.getByClubIdAndUserActiveAndDateEquals(clubId, Boolean.TRUE, targetDate);
+        List<User> users = userUseCases.getAllByClub(clubId, null, Boolean.TRUE, Boolean.FALSE, null);
+
+        Map<UUID, Presence> presencesByUserId = presences.stream()
+                .filter(presence -> presence.getUser() != null && presence.getUser().getId() != null)
+                .collect(Collectors.toMap(presence -> presence.getUser().getId(), Function.identity(), (first, second) -> first));
+
+        return users.stream()
+                .sorted(Comparator.comparing(User::getName, Comparator.nullsLast(String.CASE_INSENSITIVE_ORDER)))
+                .map(user -> {
+                    var oldPresence = presencesByUserId.get(user.getId());
+                    if (oldPresence != null) {
+                        return oldPresence;
+                    }
+
+                    return Presence.builder()
+                            .user(user)
+                            .club(user.getClub())
+                            .date(targetDate)
+                            .build();
+                })
+                .toList();
     }
 
     public List<Presence> getAllByClubIdOrUserId(Long clubId, UUID userId) {

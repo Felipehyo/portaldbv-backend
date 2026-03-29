@@ -35,7 +35,7 @@ public class PresenceController implements PresenceResource {
     @Override
     public ResponseEntity<Object> getAllByDay(Long clubId, LocalDate day) {
         var presences = useCases.getAllByDay(clubId, day);
-        return ResponseEntity.status(HttpStatus.OK).body(mapper.toResponseList(presences));
+        return ResponseEntity.status(HttpStatus.OK).body(mapper.toTodayResponseList(presences));
     }
 
     @Override
